@@ -39,7 +39,7 @@ function ProductsList() {
     <button onClick={openEditModal}>افزودن محصول</button>
     </div>
 
-    <div>
+    {/* <div>
     {products && Array.isArray(products) ? (
       products.map(product => (
         <div key={product.id}>
@@ -54,7 +54,31 @@ function ProductsList() {
     ) : (
       <div>No products available</div>
     )}
+  </div> */}
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>نام کالا</th>
+          <th>موجودی</th>
+          <th>قیمت</th>
+          <th>شناسه</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      {/* <tbody>
+        {products.map(product=><tr key={product.id}>
+          <td><p>{product.name}</p></td>
+          <td><p>{product.quantity}</p></td>
+          <td><p>{product.price}</p></td>
+          <td><p>{product.id}</p></td>
+          </tr>)}
+      </tbody> */}
+    </table>
   </div>
+
     </>
   )
 }
