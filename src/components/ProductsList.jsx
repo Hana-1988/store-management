@@ -8,7 +8,7 @@ import { deleteProduct, fetchProducts, updateProduct } from "../customHooks/useA
 function ProductsList() {
    
   const queryClient=useQueryClient();
-  const{data:products,isLoading}=useQuery({queryKey: ['products'],
+  const{data:products,isLoading,error}=useQuery({queryKey: ['products'],
     queryFn: fetchProducts,}) ;
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
   const [isAddProductModalOpen,setIsAddProductModalOpen]=useState(false);
@@ -29,12 +29,17 @@ function ProductsList() {
     setIsDeleteProductModalOpen(true);
   }
   if(isLoading) return <p>Loading...</p>
+  if (error) return <div>Error loading products</div>;
 
   return (
     <>
+    <div>
     <button onClick={openEditModal}>افزودن محصول</button>
+    </div>
 
-    {products.map((product) => (
+    <div>
+    {products && Array.isArray(products) ? (
+      products.map(product => (
         <div key={product.id}>
           <p>{product.name}</p>
           <p>{product.quantity}</p>
@@ -43,7 +48,11 @@ function ProductsList() {
           <button onClick={() => openEditModal(product)}>ویرایش</button>
           <button onClick={() => openDeleteModal(product.id)}>حذف</button>
         </div>
-      ))}
+      ))
+    ) : (
+      <div>No products available</div>
+    )}
+  </div>
     </>
   )
 }
