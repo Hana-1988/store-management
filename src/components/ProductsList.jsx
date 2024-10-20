@@ -3,6 +3,8 @@ import { useQuery,useMutation,useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
 import { deleteProduct, fetchProducts, updateProduct } from "../customHooks/useApi";
+import { MdDeleteOutline } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 
 
 function ProductsList() {
@@ -45,8 +47,8 @@ function ProductsList() {
           <p>{product.quantity}</p>
           <p>{product.price}</p>
           <p>{product.id}</p>
-          <button onClick={() => openEditModal(product)}>ویرایش</button>
-          <button onClick={() => openDeleteModal(product.id)}>حذف</button>
+          <button onClick={() => openEditModal(product)}><MdEdit/></button>
+          <button onClick={() => openDeleteModal(product.id)}><MdDeleteOutline/></button>
         </div>
       ))
     ) : (
