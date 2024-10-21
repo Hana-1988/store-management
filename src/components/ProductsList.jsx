@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery,useMutation,useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
-import { deleteProduct, getProducts, updateProduct } from "../customHooks/useApi";
+import { deleteProduct, getProducts, updateProduct } from "../services/api";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
