@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery,useMutation,useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
-import { deleteProduct, fetchProducts, updateProduct } from "../customHooks/useApi";
+import { deleteProduct, getProducts, updateProduct } from "../customHooks/useApi";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
@@ -11,7 +11,7 @@ function ProductsList() {
    
   const queryClient=useQueryClient();
   const{data:products,isLoading,error}=useQuery({queryKey: ['products'],
-    queryFn: fetchProducts,}) ;
+    queryFn: getProducts,}) ;
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
   const [isAddProductModalOpen,setIsAddProductModalOpen]=useState(false);
   const [selectedProduct,setSelectedProduct]=useState(null);
@@ -39,22 +39,6 @@ function ProductsList() {
     <button onClick={openEditModal}>افزودن محصول</button>
     </div>
 
-    {/* <div>
-    {products && Array.isArray(products) ? (
-      products.map(product => (
-        <div key={product.id}>
-          <p>{product.name}</p>
-          <p>{product.quantity}</p>
-          <p>{product.price}</p>
-          <p>{product.id}</p>
-          <button onClick={() => openEditModal(product)}><MdEdit/></button>
-          <button onClick={() => openDeleteModal(product.id)}><MdDeleteOutline/></button>
-        </div>
-      ))
-    ) : (
-      <div>No products available</div>
-    )}
-  </div> */}
 
   <div>
     <table>
