@@ -52,16 +52,16 @@ function ProductsList() {
           <th></th>
         </tr>
       </thead>
-      {/* <tbody>
-        {products.map(product=><tr key={product.id}>
+      <tbody>
+        {Array.isArray(products) && products.map(product=><tr key={product.id}>
           <td><p>{product.name}</p></td>
           <td><p>{product.quantity}</p></td>
           <td><p>{product.price}</p></td>
           <td><p>{product.id}</p></td>
           <td><button onClick={() => openEditModal(product)}><MdEdit/></button></td>
-          <td><p><button onClick={() => openDeleteModal(product.id)}><MdDeleteOutline/></button></td>
+          <td><button onClick={() => openDeleteModal(product.id)}><MdDeleteOutline/></button></td>
           </tr>)}
-      </tbody> */}
+      </tbody>
     </table>
   </div>
 
