@@ -5,13 +5,16 @@ import AddProductModal from "../modals/AddProductModal";
 import { deleteProduct, getProducts, updateProduct } from "../services/api";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import styles from "./ProductsList.module.css"
 
 
 function ProductsList() {
    
   const queryClient=useQueryClient();
-  const{data:products,isLoading,error}=useQuery({queryKey: ['products'],
+  const{ data: products = [],isLoading,error}=useQuery({queryKey: ['products'],
     queryFn: getProducts,}) ;
+    console.log({ products, isLoading, error });
+
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
   const [isAddProductModalOpen,setIsAddProductModalOpen]=useState(false);
   const [selectedProduct,setSelectedProduct]=useState(null);
@@ -40,8 +43,8 @@ function ProductsList() {
     </div>
 
 
-  <div>
-    <table>
+  <div className={styles.tabaleContainer} >
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>نام کالا</th>
