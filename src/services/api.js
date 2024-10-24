@@ -1,35 +1,43 @@
-
 import axios from 'axios';
 
-async function addProduct (newProduct) {
-  const response = await axios.post("/products",newProduct);
+const apiClient = axios.create({
+  baseURL: 'api', // آدرس پایه API بک‌اند
+});
+
+// اضافه کردن محصول جدید (POST)
+async function addProduct(newProduct) {
+  const response = await apiClient.post("/products", newProduct);
   return response.data;
 }
 
+// دریافت لیست محصولات (GET)
 async function getProducts() {
-  const response = await axios.get("/products");
+  const response = await apiClient.get("/products");
   return response.data;
 }
 
-async function updateProduct (updatedproduct) {
-  const response = await axios.put(`/products/${id}`,updatedproduct);
+// به‌روزرسانی محصول (PUT)
+async function updateProduct(id, updatedProduct) {
+  const response = await apiClient.put(`/products/${id}`, updatedProduct);
   return response.data;
 }
 
-async function deleteProduct (id){
-  const response = await axios.delete(`/products/${id}`);
+// حذف یک محصول (DELETE)
+async function deleteProduct(id) {
+  const response = await apiClient.delete(`/products/${id}`);
   return response.data;
 }
 
-async function deleteProductsBulk (productIds) {
-  const response = await axios.post("/products/bulk-delete", { ids: productIds });
+// حذف گروهی محصولات (POST)
+async function deleteProductsBulk(productIds) {
+  const response = await apiClient.post("/products/bulk-delete", { ids: productIds });
   return response.data;
 }
 
 export {
-    addProduct,
-    deleteProduct,
-    updateProduct,
-    getProducts,
-    deleteProductsBulk,
-}
+  addProduct,
+  deleteProduct,
+  updateProduct,
+  getProducts,
+  deleteProductsBulk,
+};
