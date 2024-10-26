@@ -1,13 +1,16 @@
 /* DeleteModal.css */
 
 .deleteModal {
-    width: 400px;
-    margin: auto;
+    position: absolute;
+    top: 300px;
+    left: 650px;
+    width: 472px;
+    height: 338px;
     background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
     text-align: center;
+    border: 1px;
   }
   
   .deleteModalOverlay {
@@ -15,29 +18,43 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  } 
+  .image{
+    margin: auto;
+    width: 96px;
+    height: 98px;
   }
   
   .deleteModalTitle {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: inherit;
+    margin-top: 90px;
+    color: #282828;
   }
   
   .deleteBtn {
-    background-color: red;
+    background-color: #F43F5E;
     color: white;
-    padding: 10px 20px;
+    width: 150px;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-top: 15px;
+    margin-left: 5px;
+    font-family: inherit;
   }
   
   .cancelBtn {
-    background-color: gray;
-    color: white;
-    padding: 10px 20px;
+    background-color: #DFDFDF;
+    color:  #282828CC;
+    width: 150px;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    margin-top: 15px;
+    margin-right: 5px;
+    font-family: inherit;
   }
   

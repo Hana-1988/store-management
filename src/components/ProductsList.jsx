@@ -45,7 +45,7 @@ function ProductsList() {
 
   return (
     <>
-<div className={styles.productManagement}>
+<div className={`${styles.productManagement} ${isDeleteProductModalOpen ? "blur(5px)" : ""}`}>
 
       <div className={styles.header}> 
         <span className={styles.searchIcon}><IoIosSearch /></span>
@@ -92,6 +92,17 @@ function ProductsList() {
        </tbody>
       </table>
       </div>
+
+      <DeleteModal
+        isOpen={isDeleteProductModalOpen}
+        onRequestClose={() => setIsDeleteProductModalOpen(false)}
+        onDelete={() => {
+          mutationDelete.mutate(selectedProduct);
+          setIsDeleteProductModalOpen(false);
+        }}
+      />
+
+
     </div>
 
     </>
