@@ -35,8 +35,8 @@ function ProductsList() {
     setSelectedProduct(product);
     setIsAddProductModalOpen(true);
   }
-  function openDeleteModal(productId){
-    setSelectedProduct(productId);
+  function openDeleteModal(id){
+    setSelectedProduct(id);
     setIsDeleteProductModalOpen(true);
   }
   if(isLoading) return <p>Loading...</p>
