@@ -7,6 +7,7 @@ const apiClient = axios.create({
 // اضافه کردن محصول جدید (POST)
 async function addProduct(newProduct) {
   const response = await apiClient.post("/products", newProduct);
+  console.log("API Response:", response.data);
   return response.data;
 }
 

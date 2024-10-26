@@ -3,9 +3,15 @@ import { useQuery,useMutation,useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
 import { deleteProduct, getProducts, updateProduct } from "../services/api";
-import { MdDeleteOutline } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
-import styles from "./ProductsList.module.css"
+import { AiOutlineProduct } from "react-icons/ai";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
+import styles from "./ProductsList.module.css";
+
+
+
+
 
 
 function ProductsList() {
@@ -34,39 +40,59 @@ function ProductsList() {
     setIsDeleteProductModalOpen(true);
   }
   if(isLoading) return <p>Loading...</p>
+  console.log("Error fetching products:", error);
   if (error) return <div>Error loading products</div>;
 
   return (
     <>
-    <div>
-    <button onClick={openEditModal}>افزودن محصول</button>
+<div className={styles.productManagement}>
+
+      <div className={styles.header}> 
+        <span className={styles.searchIcon}><IoIosSearch /></span>
+        <input type="text" placeholder="جستجوی کالا" />
+        <div className={styles.managerName}>
+           <div className={styles.image}><img src='/manager.jpg'/></div>
+           <div className={styles.name}>
+           <h3>حنا پورمحبی</h3>
+           <p>مدیر</p>
+           </div>
+        </div>
+      </div>
+
+      <div className={styles.addProductHeader}>
+        <div className={styles.managerIcon}>
+        <span><AiOutlineProduct /></span>
+        <h3>مدیریت کالا</h3>
+        </div>
+        <button>افزودن محصول</button>
+      </div>
+      <div className={styles.tableContainer}>
+      <table>
+        <thead>
+          <tr>
+            <th>نام کالا</th>
+            <th>موجودی</th>
+            <th>قیمت</th>
+            <th>شناسه کالا</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+           {Array.isArray(products.data) && products?.data?.length > 0 ? products.data.map(product => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>{product.quantity}</td>
+                <td>{product.price}</td>
+                <td>{product.id}</td>
+                <td><button className={styles.editBtn} onClick={() => openEditModal(product)}><FaRegEdit /></button></td>
+                <td><button className={styles.deleteBtn} onClick={() => openDeleteModal(product.id)}><RiDeleteBin6Line /></button></td>
+              </tr>
+            )) :(<tr><td colSpan="6">No products available</td></tr>)}
+       </tbody>
+      </table>
+      </div>
     </div>
-
-
-  <div className={styles.tabaleContainer} >
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>نام کالا</th>
-          <th>موجودی</th>
-          <th>قیمت</th>
-          <th>شناسه</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {Array.isArray(products) && products.map(product=><tr key={product.id}>
-          <td><p>{product.name}</p></td>
-          <td><p>{product.quantity}</p></td>
-          <td><p>{product.price}</p></td>
-          <td><p>{product.id}</p></td>
-          <td><button onClick={() => openEditModal(product)}><MdEdit/></button></td>
-          <td><button onClick={() => openDeleteModal(product.id)}><MdDeleteOutline/></button></td>
-          </tr>)}
-      </tbody>
-    </table>
-  </div>
 
     </>
   )
