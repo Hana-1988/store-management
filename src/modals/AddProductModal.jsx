@@ -34,8 +34,9 @@ function AddProductModal ({ isOpen, onRequestClose, initialData, onSubmit }){
       className={styles.productModal}
       overlayClassName={styles.productModalOverlay}
     >
-      <h3>{initialData ? 'ویرایش محصول' : 'ایجاد محصول جدید'}</h3>
+      <h3>ایجاد محصول جدید</h3>
       <form onSubmit={handleSubmit}>
+        <label>نام کالا</label>
         <input
           name="name"
           value={product.name}
@@ -43,13 +44,15 @@ function AddProductModal ({ isOpen, onRequestClose, initialData, onSubmit }){
           placeholder="نام کالا"
           className={styles.inputField}
         />
+        <label>تعداد موجودی</label>
         <input
-          name="stock"
+          name="quantity"
           value={product.quantity}
           onChange={handleChange}
-          placeholder="تعداد موجودی"
+          placeholder="تعداد "
           className={styles.inputField}
         />
+        <label>قیمت</label>
         <input
           name="price"
           value={product.price}
