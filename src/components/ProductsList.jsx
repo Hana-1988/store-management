@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
 import EditModal from "../modals/EditModal";
-import { deleteProduct, getProducts, updateProduct } from "../services/api";
+import { addProduct ,deleteProduct, getProducts, updateProduct } from "../services/api";
 import { AiOutlineProduct } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
@@ -31,6 +31,10 @@ function ProductsList() {
   
   const mutationEdit = useMutation({
     mutationFn: updateProduct,
+    onSuccess: () => queryClient.invalidateQueries(["products"]),
+  });
+  const mutationAdd = useMutation({
+    mutationFn: addProduct,
     onSuccess: () => queryClient.invalidateQueries(["products"]),
   });
 
@@ -111,7 +115,7 @@ function ProductsList() {
           isOpen={isAddProductModalOpen}
           onRequestClose={() => setIsAddProductModalOpen(false)}
           onSubmit={(newProduct) => {
-            mutationEdit.mutate(newProduct);
+            mutationAdd.mutate(newProduct);
             setIsAddProductModalOpen(false);
           }}
         />
