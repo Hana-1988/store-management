@@ -1,9 +1,6 @@
 
 .productManagement {
     padding: 20px;
-    font-family: 'Arial', sans-serif;
-    text-align: right;
-    direction: rtl; /* Ensures text aligns for Persian */
   }
   
   .header {
@@ -31,7 +28,6 @@
   .name{
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-left: 20px;
   }
   .managerName h3{
@@ -41,9 +37,12 @@
   .managerName p {
     font-size: 14px;
     color: #282828;
+    font-weight: bold;
   }
   
   .header input {
+    font-family: inherit;
+    font-size: 16px;
     width: 80%;
     padding: 5px;
     border: none;
@@ -66,6 +65,7 @@
   }
   
   .addProductHeader button {
+    font-family: inherit;
     background-color: #55A3F0;
     color: white;
     padding: 10px;
@@ -98,8 +98,7 @@
     border: 1px solid #E4E4E4;
   }
   table {
-    width: 1140px;
-    height: 737px;
+    width: 100%;
     border-collapse: collapse;
     margin-top: 0;
   }
@@ -117,7 +116,6 @@
     border-top-left-radius: 30px;
   }
 
-  
    th,td {
     padding:20px;
     text-align: right;
@@ -133,12 +131,12 @@
     font-weight: bold;
   }
 
-
   .editBtn{
     border: none;
     background-color:rgba(255, 255, 255, 0);
     font-size:20px;
     color: rgb(133, 221, 133);
+    margin-left: -50px;
   }
 
   .deleteBtn{
@@ -146,6 +144,7 @@
     background-color:rgba(255, 255, 255, 0);
     font-size:20px;
     color: rgb(241, 58, 58);
+    margin-right: -40px;
   }
   
   

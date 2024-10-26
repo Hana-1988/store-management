@@ -13,6 +13,9 @@ body {
   padding: 10px;
   background:#F7F8F8;
   color: #282828;
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 *{
   margin: 0;
