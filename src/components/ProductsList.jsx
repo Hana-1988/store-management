@@ -45,7 +45,7 @@ function ProductsList() {
 
   return (
     <>
-<div className={`${styles.productManagement} ${isDeleteProductModalOpen ? "blur(5px)" : ""}`}>
+<div className={`${styles.productManagement} ${isDeleteProductModalOpen ? "blur(10px)" : ""}`}>
 
       <div className={styles.header}> 
         <span className={styles.searchIcon}><IoIosSearch /></span>
@@ -92,6 +92,21 @@ function ProductsList() {
        </tbody>
       </table>
       </div>
+
+
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onRequestClose={() => setIsAddProductModalOpen(false)}
+        initialData={selectedProduct}
+        onSubmit={(updatedProduct) => {
+          if (selectedProduct) {
+            mutationEdit.mutate({ id: selectedProduct.id, updatedProduct });
+          } else {
+            mutationAdd.mutate(updatedProduct);
+          }
+          setIsAddProductModalOpen(false);
+        }}
+      />
 
       <DeleteModal
         isOpen={isDeleteProductModalOpen}
