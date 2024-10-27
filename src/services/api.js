@@ -5,18 +5,6 @@ const apiClient = axios.create({
 });
 
 
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("authToken"); // فرض می‌کنیم توکن در localStorage ذخیره شده است
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-
 async function addProduct(newProduct) {
   const response = await apiClient.post("/products", newProduct);
   console.log("API Response:", response.data);
