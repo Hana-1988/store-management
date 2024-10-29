@@ -17,9 +17,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // آدرس API سرور بک‌اند
+        target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''), // برای حذف '/api' از مسیر
+        rewrite: (path) => path.replace(/^\/api/, ''), 
       },
     },
   },

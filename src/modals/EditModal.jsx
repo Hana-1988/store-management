@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import styles from'./EditModal.module.css';
+import styles from './EditModal.module.css';
 
-function EditModal ({ isOpen, onRequestClose, initialData, onSubmit }){
+function EditModal ({ isOpen, onRequestClose, initialData,onSubmit}) {
   const [product, setProduct] = useState({
     name: '',
     quantity: '',
@@ -10,10 +10,10 @@ function EditModal ({ isOpen, onRequestClose, initialData, onSubmit }){
   });
 
   useEffect(() => {
-    if (initialData) {
+    if (isOpen && initialData) {
       setProduct(initialData);
     }
-  }, [initialData]);
+  }, [isOpen, initialData]);
 
   const handleChange = (e) => {
     setProduct({
@@ -34,39 +34,40 @@ function EditModal ({ isOpen, onRequestClose, initialData, onSubmit }){
       className={styles.productModal}
       overlayClassName={styles.productModalOverlay}
     >
-      <h3>ویرایش اطلاعات</h3>
-      <form onSubmit={handleSubmit}>
-        <label>نام کالا</label>
-        <input
-          name="name"
-          value={product.name}
-          onChange={handleChange}
-          placeholder="نام کالا"
-          className={styles.inputField}
-        />
-        <label>تعداد موجودی</label>
-        <input
-          name="quantity"
-          value={product.quantity}
-          onChange={handleChange}
-          placeholder="تعداد "
-          className={styles.inputField}
-        />
-        <label>قیمت</label>
-        <input
-          name="price"
-          value={product.price}
-          onChange={handleChange}
-          placeholder="قیمت"
-          className={styles.inputField}
-        />
-        <button type="submit" className={styles.submitBtn}>
-          {initialData ? 'ثبت اطلاعات جدید' : 'ایجاد'}
-        </button>
-        <button onClick={onRequestClose} className={styles.cancelBtn}>انصراف</button>
-      </form>
+     <div>
+     <h3>ویرایش اطلاعات</h3>
+      <label>نام کالا</label>
+      <input
+        name="name"
+        value={product.name}
+        onChange={handleChange}
+        placeholder="نام کالا"
+        className={styles.inputField}
+      />
+      <label>تعداد موجودی</label>
+      <input
+        name="quantity"
+        value={product.quantity}
+        onChange={handleChange}
+        placeholder="تعداد "
+        className={styles.inputField}
+      />
+      <label>قیمت</label>
+      <input
+        name="price"
+        value={product.price}
+        onChange={handleChange}
+        placeholder="قیمت"
+        className={styles.inputField}
+      />
+      <button onClick={handleSubmit} type="button" className={styles.submitBtn}>ثبت اطلاعات جدید</button>
+      <button onClick={onRequestClose} className={styles.cancelBtn}>انصراف</button>
+     </div>
     </Modal>
   );
-};
+}
 
 export default EditModal;
+
+
+

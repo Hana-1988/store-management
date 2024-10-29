@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import styles from'./AddProductModal.module.css';
+import styles from './AddProductModal.module.css';
 
-function AddProductModal ({ isOpen, onRequestClose, initialData, onSubmit }){
+function AddProductModal({ isOpen, onRequestClose, onSubmit, product: initialProduct }) {
   const [product, setProduct] = useState({
     name: '',
+    price: '',
     quantity: '',
-    price: ''
   });
 
   useEffect(() => {
-    if (initialData) {
-      setProduct(initialData);
+    if (initialProduct) {
+      setProduct(initialProduct);
     }
-  }, [initialData]);
+  }, [initialProduct]);
 
   const handleChange = (e) => {
     setProduct({
       ...product,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,21 +35,13 @@ function AddProductModal ({ isOpen, onRequestClose, initialData, onSubmit }){
       overlayClassName={styles.productModalOverlay}
     >
       <h3>ایجاد محصول جدید</h3>
-      <form onSubmit={handleSubmit}>
-        <label>نام کالا</label>
+      <div>
+      <label>نام کالا</label>
         <input
           name="name"
           value={product.name}
           onChange={handleChange}
           placeholder="نام کالا"
-          className={styles.inputField}
-        />
-        <label>تعداد موجودی</label>
-        <input
-          name="quantity"
-          value={product.quantity}
-          onChange={handleChange}
-          placeholder="تعداد "
           className={styles.inputField}
         />
         <label>قیمت</label>
@@ -60,13 +52,21 @@ function AddProductModal ({ isOpen, onRequestClose, initialData, onSubmit }){
           placeholder="قیمت"
           className={styles.inputField}
         />
-        <button type="submit" className={styles.submitBtn}>
-          {initialData ? 'ثبت اطلاعات جدید' : 'ایجاد'}
-        </button>
-        <button onClick={onRequestClose} className={styles.cancelBtn}>انصراف</button>
-      </form>
+        <label>تعداد موجودی</label>
+        <input
+          name="quantity"
+          value={product.quantity}
+          onChange={handleChange}
+          placeholder="تعداد"
+          className={styles.inputField}
+        />
+       
+        <button onClick={handleSubmit} type="submit" className={styles.submitBtn}>ایجاد</button>
+        <button type="button" onClick={onRequestClose} className={styles.cancelBtn}>انصراف</button>
+      </div>
     </Modal>
   );
 };
 
 export default AddProductModal;
+

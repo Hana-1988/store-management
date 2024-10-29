@@ -17,7 +17,6 @@ function ProductsList() {
     queryFn: getProducts,
   });
   
-  console.log({ products, isLoading, error });
 
   const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -41,6 +40,7 @@ function ProductsList() {
   function openEditModal(product) {
     setSelectedProduct(product);
     setIsEditProductModalOpen(true);
+    console.log('Selected Product:', product); // Debug
   }
   
   function openDeleteModal(id) {
@@ -54,7 +54,6 @@ function ProductsList() {
   }
 
   if (isLoading) return <p>Loading...</p>;
-  console.log("Error fetching products:", error);
   if (error) return <div>Error loading products</div>;
 
   return (
@@ -134,7 +133,8 @@ function ProductsList() {
           onRequestClose={() => setIsEditProductModalOpen(false)}
           initialData={selectedProduct}
           onSubmit={(updatedProduct) => {
-            mutationEdit.mutate(updatedProduct);
+            console.log('Updating Product:', { id: selectedProduct.id, ...updatedProduct });
+            mutationEdit.mutate({ id: selectedProduct.id, ...updatedProduct });
             setIsEditProductModalOpen(false);
           }}
         />
