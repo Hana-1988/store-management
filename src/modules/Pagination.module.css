@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.container button{
+    background-color: #55A3F0;
+    width: 50px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+}
+.container span{
+    border: 1px solid #8D8D8D80;
+    border-radius: 42px;
+    padding: 10px 15px 10px 15px;
+}

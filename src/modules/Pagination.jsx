@@ -1,22 +1,14 @@
-// Pagination.js
-import React from 'react';
+import styles from "./Pagination.module.css"
 
 function Pagination ({ currentPage, totalPages, onPageChange }) {
   return (
-    <div>
+    <div className={styles.container}>
       <button 
-        onClick={() => onPageChange(currentPage - 1)} 
-        disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-      <span> Page {currentPage} </span>
+        onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}> بعدی</button>
+      <span>{currentPage} </span>
+      <span>{currentPage + 1} </span>
       <button 
-        onClick={() => onPageChange(currentPage + 1)} 
-        disabled={currentPage === totalPages}
-      >
-        Next
-      </button>
+        onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>قبلی</button>
     </div>
   );
 };
