@@ -11,7 +11,7 @@ const apiClient = axios.create({
 // Interceptors
 apiClient.interceptors.request.use(
   (request) => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MzAwNDA0OTIzNjMiLCJ1c2VybmFtZSI6ImhhbmEiLCJpYXQiOjE3MzAxODc3NTksImV4cCI6MTczMDE5MTM1OX0.aK9-jhbx1aw6BZB6VL6cfixV_uxu1qgJKT3esWOcEXA"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MzAwNDA0OTIzNjMiLCJ1c2VybmFtZSI6ImhhbmEiLCJpYXQiOjE3MzAyMjIyNDYsImV4cCI6MTczMDIyNTg0Nn0.HXxVE0LWp_BxXhOjajyYpm6DAlDsZ8FV-LsCUTDKm14"
 
     if (token) {
       request.headers["Authorization"] = `Bearer ${token}`;
@@ -31,13 +31,13 @@ apiClient.interceptors.response.use(
 // CRUD Functions
 async function addProduct(newProduct) {
   const response = await apiClient.post("/products", newProduct);
-  console.log(response)
   return response;
 }
 
-async function getProducts() {
-  const response = await apiClient.get("/products");
-  return response;
+async function getProducts(page, limit) {
+  const response = await apiClient.get(`/products?page=${page}&limit=${limit}`);
+  console.log(response)
+  return response.data; 
 }
 
 async function updateProduct(id, updatedProduct) {

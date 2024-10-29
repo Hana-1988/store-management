@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "../modals/DeleteModal";
 import AddProductModal from "../modals/AddProductModal";
 import EditModal from "../modals/EditModal";
+import Pagination from "../modules/Pagination";
 import { addProduct ,deleteProduct, getProducts, updateProduct } from "../services/api";
 import { AiOutlineProduct } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -12,17 +13,21 @@ import styles from "./ProductsList.module.css";
 
 function ProductsList() {
   const queryClient = useQueryClient();
+  const [page,setPage]=useState(1);
+  const limit = 10;
+
   const { data: products = [], isLoading, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
+    queryKey: ["products", page],
+    queryFn: () => getProducts(page, limit), 
+    keepPreviousData: true,
   });
-  
+
 
   const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  
   const mutationDelete = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => queryClient.invalidateQueries(["products"]),
@@ -40,7 +45,6 @@ function ProductsList() {
   function openEditModal(product) {
     setSelectedProduct(product);
     setIsEditProductModalOpen(true);
-    console.log('Selected Product:', product); // Debug
   }
   
   function openDeleteModal(id) {
@@ -55,6 +59,7 @@ function ProductsList() {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <div>Error loading products</div>;
+  const totalPages = Math.ceil(products.totalProducts / limit);
 
   return (
     <>
@@ -92,8 +97,8 @@ function ProductsList() {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(products.data) && products?.data?.length > 0 ? (
-                products.data.map((product) => (
+              {Array.isArray(products) && products.length > 0 ? (
+                products.map((product) => (
                   <tr key={product.id}>
                     <td>{product.name}</td>
                     <td>{product.quantity}</td>
@@ -139,6 +144,11 @@ function ProductsList() {
           }}
         />
       </div>
+      <Pagination 
+       currentPage={page} 
+       totalPages={totalPages} 
+       onPageChange={setPage} 
+      />
     </>
   );
 }
