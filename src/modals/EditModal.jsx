@@ -24,7 +24,7 @@ function EditModal ({ isOpen, onRequestClose, initialData,onSubmit}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(product);
+    onSubmit( product);
   };
 
   return (
@@ -34,7 +34,7 @@ function EditModal ({ isOpen, onRequestClose, initialData,onSubmit}) {
       className={styles.productModal}
       overlayClassName={styles.productModalOverlay}
     >
-     <div>
+     <form onSubmit={handleSubmit}>
      <h3>ویرایش اطلاعات</h3>
       <label>نام کالا</label>
       <input
@@ -60,9 +60,9 @@ function EditModal ({ isOpen, onRequestClose, initialData,onSubmit}) {
         placeholder="قیمت"
         className={styles.inputField}
       />
-      <button onClick={handleSubmit} type="button" className={styles.submitBtn}>ثبت اطلاعات جدید</button>
+      <button  type="submit" className={styles.submitBtn}>ثبت اطلاعات جدید</button>
       <button onClick={onRequestClose} className={styles.cancelBtn}>انصراف</button>
-     </div>
+     </form>
     </Modal>
   );
 }

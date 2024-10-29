@@ -11,7 +11,7 @@ const apiClient = axios.create({
 // Interceptors
 apiClient.interceptors.request.use(
   (request) => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MzAwNDA0OTIzNjMiLCJ1c2VybmFtZSI6ImhhbmEiLCJpYXQiOjE3MzAyMjIyNDYsImV4cCI6MTczMDIyNTg0Nn0.HXxVE0LWp_BxXhOjajyYpm6DAlDsZ8FV-LsCUTDKm14"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MzAwNDA0OTIzNjMiLCJ1c2VybmFtZSI6ImhhbmEiLCJpYXQiOjE3MzAyMjgzNzgsImV4cCI6MTczMDIzMTk3OH0.l_ECA-BksnOSeXYUuWd29uqLsyp1a5G-oJGtVk2LowQ"
 
     if (token) {
       request.headers["Authorization"] = `Bearer ${token}`;
@@ -36,11 +36,10 @@ async function addProduct(newProduct) {
 
 async function getProducts(page, limit) {
   const response = await apiClient.get(`/products?page=${page}&limit=${limit}`);
-  console.log(response)
   return response.data; 
 }
 
-async function updateProduct(id, updatedProduct) {
+async function updateProduct({ id, updatedProduct }) {  
   const response = await apiClient.put(`/products/${id}`, updatedProduct);
   return response;
 }
